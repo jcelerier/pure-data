@@ -1551,6 +1551,9 @@ extern void sys_exit(void);
 
 void glob_exit(void *dummy, t_float status)
 {
+#if defined(PDINSTANCE) // how to detect that we're building for libpd ?
+    sys_stopgui();
+#else
         /* sys_exit() sets the sys_quit flag, so all loops end */
     sys_exit();
     sys_close_audio();
@@ -1561,6 +1564,7 @@ void glob_exit(void *dummy, t_float status)
         sys_rmpollfn(INTER->i_guisock);
     }
     exit((int)status);
+#endif
 }
 void glob_quit(void *dummy)
 {
