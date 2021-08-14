@@ -210,6 +210,9 @@ void endpost(void)
     else post("");
 }
 
+#if defined(__GNUC__)
+__attribute__((visibility("hidden")))
+#endif
 void error(const char *fmt, ...)
 {
     char buf[MAXPDSTRING];
