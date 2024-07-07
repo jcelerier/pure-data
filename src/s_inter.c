@@ -1785,7 +1785,11 @@ void sys_exit(int status);
     /* exit scheduler and shut down gracefully */
 void glob_exit(void *dummy, t_floatarg status)
 {
+#if defined(PDINSTANCE) // how to detect that we're building for libpd ?
+    sys_stopgui();
+#else
     sys_exit(status);
+#endif
 }
 
     /* force-quit */
